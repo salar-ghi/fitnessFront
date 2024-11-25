@@ -7,6 +7,19 @@ export type Equipment = 'dumbbell' | 'barbell' | 'smith-machine' | 'cable-machin
 export type Location = 'home' | 'gym';
 export type MuscleGroup = 'chest' | 'back' | 'legs' | 'shoulders' | 'arms' | 'core';
 
+export type FitnessLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
+export type AgeRange = 'Under Eighteen' | 'Eighteen To TwentyNine' | 'Thirty To ThirtyNine' | 'Fourty To FourtyNine' | 'Fifty To FiftyNine' | 'sixty plus';
+export type PlanDuration = 'Daily' | 'Weekly' | 'Monthly' | 'Quarterly';
+export type WeekDay = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+
+
+interface WorkoutSchedule {
+  day: WeekDay;
+  duration: number;
+  startTime: string;
+}
+
+
 interface UserState {
   currentStep: number;
   gender: Gender | null;
@@ -18,6 +31,10 @@ interface UserState {
   location: Location | null;
   equipment: Equipment[];
   targetMuscles: MuscleGroup[];
+  fitnessLevel: FitnessLevel | null;
+  ageRange: AgeRange | null;
+  planDuration: PlanDuration | null;
+  workoutSchedule: WorkoutSchedule[];
   setGender: (gender: Gender) => void;
   setDateOfBirth: (date: Date) => void;
   setHeight: (height: number) => void;
@@ -27,6 +44,10 @@ interface UserState {
   setLocation: (location: Location) => void;
   toggleEquipment: (equipment: Equipment) => void;
   toggleMuscle: (muscle: MuscleGroup) => void;
+  setFitnessLevel: (level: FitnessLevel) => void;
+  setAgeRange: (range: AgeRange) => void;
+  setPlanDuration: (duration: PlanDuration) => void;
+  setWorkoutSchedule: (schedule: WorkoutSchedule[]) => void;
   nextStep: () => void;
   previousStep: () => void;
   resetForm: () => void;
@@ -45,6 +66,10 @@ export const useUserStore = create<UserState>()(
       location: null,
       equipment: [],
       targetMuscles: [],
+      fitnessLevel: null,
+      ageRange: null,
+      planDuration: null,
+      workoutSchedule: [],
       setGender: (gender) => set({ gender }),
       setDateOfBirth: (date) => set({ dateOfBirth: date }),
       setHeight: (height) => set({ height }),
@@ -64,6 +89,10 @@ export const useUserStore = create<UserState>()(
             ? state.targetMuscles.filter((m) => m !== muscle)
             : [...state.targetMuscles, muscle],
         })),
+      setFitnessLevel: (level) => set({ fitnessLevel: level }),
+      setAgeRange: (range) => set({ ageRange: range }),
+      setPlanDuration: (duration) => set({ planDuration: duration }),
+      setWorkoutSchedule: (schedule) => set({ workoutSchedule: schedule }),
       nextStep: () => set((state) => ({ currentStep: state.currentStep + 1 })),
       previousStep: () => set((state) => ({ currentStep: state.currentStep - 1 })),
       resetForm: () =>
@@ -78,6 +107,10 @@ export const useUserStore = create<UserState>()(
           location: null,
           equipment: [],
           targetMuscles: [],
+          fitnessLevel: null,
+          ageRange: null,
+          planDuration: null,
+          workoutSchedule: [],
         }),
     }),
     {

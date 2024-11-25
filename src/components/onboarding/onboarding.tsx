@@ -3,8 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useUserStore } from "@/lib/store";
 import { GenderStep } from "./steps/gender-step";
-import { AgeStep } from "./steps/age-step";
 import { MeasurementsStep } from "./steps/measurements-step";
+import { AgeRangeStep } from "./steps/age-range-step";
+import { AgeStep } from "./steps/age-step";
 import { BodyTypeStep } from "./steps/body-type-step";
 import { LocationStep } from "./steps/location-step";
 import { EquipmentStep } from "./steps/equipment-step";
@@ -14,8 +15,9 @@ import { WorkoutPlan } from "./steps/workout-plan";
 
 const steps = [
   GenderStep,
-  AgeStep,
   MeasurementsStep,
+  AgeRangeStep,
+  AgeStep,
   BodyTypeStep,
   LocationStep,
   EquipmentStep,
