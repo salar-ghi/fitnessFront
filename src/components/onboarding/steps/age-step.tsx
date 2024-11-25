@@ -7,6 +7,7 @@ import { useUserStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Label } from "@/components/ui/label";
 
 const generateYears = () => {
   const currentYear = new Date().getFullYear();
@@ -45,7 +46,7 @@ export function AgeStep() {
     }
     const now = new Date();
     return {
-      year: now.getFullYear(),
+      year: now.getFullYear() - 25,
       month: now.getMonth(),
       day: now.getDate(),
     };
@@ -78,69 +79,81 @@ export function AgeStep() {
         When were you born?
       </h2>
 
-      <Card className="p-6">
-        <div className="grid grid-cols-3 gap-4">
+      <Card className="p-4 max-w-sm mx-auto">
+        <div className="grid grid-cols-3 gap-3">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Year</label>
-            <ScrollArea className="h-[200px] rounded-md border">
-              <div className="p-2">
-                {years.map((year) => (
-                  <div
-                    key={year}
-                    className={`p-2 cursor-pointer rounded-lg transition-colors ${
-                      selectedDate.year === year
-                        ? "bg-green-500 text-white"
-                        : "hover:bg-green-100 dark:hover:bg-green-900"
-                    }`}
-                    onClick={() => handleDateChange("year", year)}
-                  >
-                    {year}
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
+            <Label className="text-sm font-medium">Year</Label>
+            <div className="relative">
+              <ScrollArea className="h-[200px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+                <div className="py-20">
+                  {years.map((year) => (
+                    <div
+                      key={year}
+                      className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                        selectedDate.year === year
+                          ? "bg-green-500 text-white"
+                          : "hover:bg-green-100 dark:hover:bg-green-900"
+                      }`}
+                      onClick={() => handleDateChange("year", year)}
+                    >
+                      {year}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Month</label>
-            <ScrollArea className="h-[200px] rounded-md border">
-              <div className="p-2">
-                {months.map((month) => (
-                  <div
-                    key={month}
-                    className={`p-2 cursor-pointer rounded-lg transition-colors ${
-                      months[selectedDate.month] === month
-                        ? "bg-green-500 text-white"
-                        : "hover:bg-green-100 dark:hover:bg-green-900"
-                    }`}
-                    onClick={() => handleDateChange("month", month)}
-                  >
-                    {month}
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
+            <Label className="text-sm font-medium">Month</Label>
+            <div className="relative">
+              <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+                <div className="py-20">
+                  {months.map((month) => (
+                    <div
+                      key={month}
+                      className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                        months[selectedDate.month] === month
+                          ? "bg-green-500 text-white"
+                          : "hover:bg-green-100 dark:hover:bg-green-900"
+                      }`}
+                      onClick={() => handleDateChange("month", month)}
+                    >
+                      {month}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Day</label>
-            <ScrollArea className="h-[200px] rounded-md border">
-              <div className="p-2">
-                {days.map((day) => (
-                  <div
-                    key={day}
-                    className={`p-2 cursor-pointer rounded-lg transition-colors ${
-                      selectedDate.day === day
-                        ? "bg-green-500 text-white"
-                        : "hover:bg-green-100 dark:hover:bg-green-900"
-                    }`}
-                    onClick={() => handleDateChange("day", day)}
-                  >
-                    {day}
-                  </div>
-                ))}
+            <Label className="text-sm font-medium">Day</Label>
+            <div className="relative">
+              <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+                <div className="py-20">
+                  {days.map((day) => (
+                    <div
+                      key={day}
+                      className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                        selectedDate.day === day
+                          ? "bg-green-500 text-white"
+                          : "hover:bg-green-100 dark:hover:bg-green-900"
+                      }`}
+                      onClick={() => handleDateChange("day", day)}
+                    >
+                      {day}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
               </div>
-            </ScrollArea>
           </div>
         </div>
       </Card>

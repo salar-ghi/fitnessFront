@@ -26,7 +26,7 @@ export function GenderStep() {
           >
             <div className="aspect-square relative mb-4">
               <Image
-                src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&h=500&fit=crop"
+                src="/images/man.jpg"
                 alt="Male"
                 //width={350}
                 //height={500}
@@ -49,7 +49,7 @@ export function GenderStep() {
           >
             <div className="aspect-square relative mb-4">
               <Image
-                src="https://images.unsplash.com/photo-1609899537878-39d4a48ad276?w=500&h=500&fit=crop"
+                src="/images/woman 1.jpg"
                 alt="Female"
                 //width={350}
                 //height={500}
