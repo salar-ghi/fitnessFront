@@ -3,25 +3,27 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useUserStore } from "@/lib/store";
 import { GenderStep } from "./steps/gender-step";
-import { MeasurementsStep } from "./steps/measurements-step";
 import { AgeRangeStep } from "./steps/age-range-step";
 import { AgeStep } from "./steps/age-step";
+import { MeasurementsStep } from "./steps/measurements-step";
 import { BodyTypeStep } from "./steps/body-type-step";
 import { LocationStep } from "./steps/location-step";
 import { EquipmentStep } from "./steps/equipment-step";
 import { MuscleGroupStep } from "./steps/muscle-group-step";
+import { LevelStep } from "./steps/level-step";
 import { GoalsStep } from "./steps/goals-step";
 import { WorkoutPlan } from "./steps/workout-plan";
 
 const steps = [
   GenderStep,
-  MeasurementsStep,
   AgeRangeStep,
   AgeStep,
+  MeasurementsStep,
   BodyTypeStep,
   LocationStep,
   EquipmentStep,
   MuscleGroupStep,
+  LevelStep,
   GoalsStep,
   WorkoutPlan,
 ];

@@ -14,10 +14,10 @@ export function GenderStep() {
       <h2 className="text-2xl font-semibold text-center text-green-800 dark:text-green-100">
         Select Your Gender
       </h2>
-      <div className="grid grid-cols-2 gap-4">
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <div className="grid grid-cols-2 gap-3 max-w-s mx-auto">
+        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
           <Card
-            className={`p-4 cursor-pointer ${
+            className={`p-3 cursor-pointer ${
               gender === "male"
                 ? "border-green-500 bg-green-50 dark:bg-green-900"
                 : ""
@@ -34,13 +34,13 @@ export function GenderStep() {
                 className="object-cover rounded-lg"
               />
             </div>
-            <h3 className="text-center font-medium">Male</h3>
+            <h3 className="text-center text-sm font-medium">Male</h3>
           </Card>
         </motion.div>
 
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
           <Card
-            className={`p-4 cursor-pointer ${
+            className={`p-3 cursor-pointer ${
               gender === "female"
                 ? "border-green-500 bg-green-50 dark:bg-green-900"
                 : ""
@@ -57,7 +57,7 @@ export function GenderStep() {
                 className="object-cover rounded-lg"
               />
             </div>
-            <h3 className="text-center font-medium">Female</h3>
+            <h3 className="text-center text-sm font-medium">Female</h3>
           </Card>
         </motion.div>
       </div>

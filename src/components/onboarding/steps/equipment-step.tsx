@@ -13,37 +13,37 @@ const equipmentList = [
     id: "dumbbell",
     label: "Dumbbells",
     description: "Free weights for strength training",
-    image: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=300&h=300&fit=crop",
   },
   {
     id: "barbell",
     label: "Barbell",
     description: "For compound exercises",
-    image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=300&h=300&fit=crop",
   },
   {
     id: "smith-machine",
     label: "Smith Machine",
     description: "Guided barbell exercises",
-    image: "https://images.unsplash.com/photo-1632167764165-74a3d686e9f8?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1632167764165-74a3d686e9f8?w=300&h=300&fit=crop",
   },
   {
     id: "cable-machine",
     label: "Cable Machine",
     description: "For resistance training",
-    image: "https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=300&h=300&fit=crop",
   },
   {
     id: "bodyweight",
     label: "Bodyweight",
     description: "No equipment needed",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop",
   },
   {
     id: "resistance-bands",
     label: "Resistance Bands",
     description: "Portable resistance training",
-    image: "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&h=300&fit=crop",
+    image: "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=300&h=300&fit=crop",
   },
 ] as const;
 
@@ -70,43 +70,48 @@ export function EquipmentStep() {
       </h2>
 
       <ScrollArea className="h-[calc(100vh-200px)]">
-        <div className="grid grid-cols-2 gap-2 px-2">
+        <div className="grid grid-cols-2 gap-2 px-2 max-w-xs mx-auto">
           {filteredEquipment.map((eq) => (
-            <Card
+            <motion.div
               key={eq.id}
-              className={`overflow-hidden cursor-pointer transition-all ${
-                equipment.includes(eq.id)
-                  ? "ring-2 ring-green-500"
-                  : "hover:shadow-lg"
-              }`}
-              onClick={() => toggleEquipment(eq.id)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="relative h-24">
-                <Image
-                  src={eq.image}
-                  alt={eq.label}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-2">
-                <div className="flex items-start space-x-2">
-                  <Checkbox
-                    id={eq.id}
-                    checked={equipment.includes(eq.id)}
-                    className="mt-1 border-green-500 data-[state=checked]:bg-green-500"
+              <Card
+                className={`aspect-square overflow-hidden cursor-pointer transition-all ${
+                  equipment.includes(eq.id)
+                    ? "ring-2 ring-green-500"
+                    : "hover:shadow-lg"
+                }`}
+                onClick={() => toggleEquipment(eq.id)}
+              >
+                <div className="relative h-2/3">
+                  <Image
+                    src={eq.image}
+                    alt={eq.label}
+                    fill
+                    className="object-cover"
                   />
-                  <div>
-                    <label htmlFor={eq.id} className="text-sm font-medium">
-                      {eq.label}
-                    </label>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">
-                      {eq.description}
-                    </p>
+                </div>
+                <div className="p-2 h-1/3">
+                  <div className="flex items-start space-x-2">
+                    <Checkbox
+                      id={eq.id}
+                      checked={equipment.includes(eq.id)}
+                      className="mt-1 border-green-500 data-[state=checked]:bg-green-500"
+                    />
+                    <div>
+                      <label htmlFor={eq.id} className="text-xs font-medium">
+                        {eq.label}
+                      </label>
+                      <p className="text-[10px] text-gray-600 dark:text-gray-300 line-clamp-2">
+                        {eq.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </ScrollArea>
