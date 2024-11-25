@@ -12,6 +12,8 @@ import { EquipmentStep } from "./steps/equipment-step";
 import { MuscleGroupStep } from "./steps/muscle-group-step";
 import { LevelStep } from "./steps/level-step";
 import { GoalsStep } from "./steps/goals-step";
+import { PlanDurationStep } from "./steps/plan-duration-step";
+import { ScheduleStep } from "./steps/schedule-step";
 import { WorkoutPlan } from "./steps/workout-plan";
 
 const steps = [
@@ -25,6 +27,8 @@ const steps = [
   MuscleGroupStep,
   LevelStep,
   GoalsStep,
+  PlanDurationStep,
+  ScheduleStep,
   WorkoutPlan,
 ];
 
