@@ -18,8 +18,8 @@ import { WorkoutPlan } from "./steps/workout-plan";
 
 const steps = [
   GenderStep,
-  AgeRangeStep,
   AgeStep,
+  AgeRangeStep,
   MeasurementsStep,
   BodyTypeStep,
   LocationStep,

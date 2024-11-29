@@ -37,7 +37,7 @@ export function AgeStep() {
     month: number;
     day: number;
   }>(() => {
-    if (dateOfBirth && dateOfBirth instanceof Date) {
+    if (dateOfBirth) {
       return {
         year: dateOfBirth.getFullYear(),
         month: dateOfBirth.getMonth(),
@@ -82,9 +82,9 @@ export function AgeStep() {
       <Card className="p-4 max-w-sm mx-auto">
         <div className="grid grid-cols-3 gap-3">
           <div className="space-y-2">
-            <Label className="text-sm font-medium">Year</Label>
+            <Label className="text-xs font-medium">Year</Label>
             <div className="relative">
-              <ScrollArea className="h-[200px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+              <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
                 <div className="py-20">
@@ -107,7 +107,7 @@ export function AgeStep() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-sm font-medium">Month</Label>
+            <Label className="text-xs font-medium">Month</Label>
             <div className="relative">
               <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
@@ -132,7 +132,7 @@ export function AgeStep() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-sm font-medium">Day</Label>
+            <Label className="text-xs font-medium">Day</Label>
             <div className="relative">
               <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
@@ -153,7 +153,7 @@ export function AgeStep() {
                   ))}
                 </div>
               </ScrollArea>
-              </div>
+            </div>
           </div>
         </div>
       </Card>

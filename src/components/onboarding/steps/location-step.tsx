@@ -9,15 +9,15 @@ import { Card } from "@/components/ui/card";
 const locations = [
   {
     id: "home",
-    title: "Home Workout",
+    title: "Home",
     icon: Home,
-    description: "Exercise with minimal equipment at home",
+    description: "Minimal equipment",
   },
   {
     id: "gym",
-    title: "Gym Workout",
+    title: "Gym",
     icon: Dumbbell,
-    description: "Access to full gym equipment",
+    description: "Full equipment",
   },
 ] as const;
 
@@ -34,25 +34,25 @@ export function LocationStep() {
         Where will you exercise?
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
         {locations.map((loc) => (
           <motion.div
             key={loc.id}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Card
-              className={`p-6 cursor-pointer ${
+              className={`aspect-square cursor-pointer ${
                 location === loc.id
                   ? "border-green-500 bg-green-50 dark:bg-green-900"
                   : ""
               }`}
               onClick={() => setLocation(loc.id)}
             >
-              <div className="flex flex-col items-center text-center">
-                <loc.icon className="w-12 h-12 mb-4 text-green-600" />
-                <h3 className="font-medium mb-2">{loc.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+              <div className="h-full p-3 flex flex-col items-center justify-center text-center space-y-2">
+                <loc.icon className="w-8 h-8 text-green-600" />
+                <h3 className="text-xs font-medium">{loc.title}</h3>
+                <p className="text-[10px] text-gray-600 dark:text-gray-300">
                   {loc.description}
                 </p>
               </div>

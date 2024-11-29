@@ -3,24 +3,22 @@
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+const generateWeights = () => {
+  const weights = [];
+  for (let w = 40; w <= 150; w++) {
+    weights.push(w);
+  }
+  weights.push("150+");
+  return weights;
+};
 
 export function GoalsStep() {
-  const { weight, targetWeight, setTargetWeight, nextStep, previousStep } =
-    useUserStore();
-
-  const handleNext = () => {
-    if (targetWeight) {
-      nextStep();
-    }
-  };
-
-  const handleTargetWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTargetWeight(value ? Number(value) : 0);
-  };
+  const { weight, targetWeight, setTargetWeight, nextStep, previousStep } = useUserStore();
+  const weights = generateWeights();
 
   return (
     <motion.div
@@ -32,30 +30,39 @@ export function GoalsStep() {
         What's your target weight?
       </h2>
 
-      <Card className="p-6 space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="current-weight">Current Weight</Label>
-          <Input
-            id="current-weight"
-            type="number"
-            value={weight || ""}
-            disabled
-            className="border-green-200"
-          />
-        </div>
+      <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+        <Card className="p-4">
+          <Label className="text-xs font-medium">Current Weight</Label>
+          <div className="mt-2 py-2 px-3 bg-gray-50 dark:bg-gray-900 rounded-md">
+            <p className="text-sm font-medium text-center">{weight} kg</p>
+          </div>
+        </Card>
 
-        <div className="space-y-2">
-          <Label htmlFor="target-weight">Target Weight (kg)</Label>
-          <Input
-            id="target-weight"
-            type="number"
-            value={targetWeight || ""}
-            onChange={handleTargetWeightChange}
-            placeholder="Enter your target weight"
-            className="border-green-200 focus:border-green-500"
-          />
-        </div>
-      </Card>
+        <Card className="p-4">
+          <Label className="text-xs font-medium">Target Weight (kg)</Label>
+          <div className="relative mt-2">
+            <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
+              <div className="py-20">
+                {weights.map((w) => (
+                  <div
+                    key={w}
+                    className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                      targetWeight === w
+                        ? "bg-green-500 text-white"
+                        : "hover:bg-green-100 dark:hover:bg-green-900"
+                    }`}
+                    onClick={() => setTargetWeight(typeof w === "string" ? 150 : w)}
+                  >
+                    {w}
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
+        </Card>
+      </div>
 
       <div className="flex justify-between">
         <Button
@@ -66,7 +73,7 @@ export function GoalsStep() {
           Previous
         </Button>
         <Button
-          onClick={handleNext}
+          onClick={nextStep}
           disabled={!targetWeight}
           className="bg-green-600 hover:bg-green-700 text-white"
         >

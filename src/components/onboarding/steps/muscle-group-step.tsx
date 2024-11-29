@@ -61,7 +61,7 @@ export function MuscleGroupStep() {
       </h2>
 
       <ScrollArea className="h-[calc(100vh-200px)]">
-        <div className="grid grid-cols-2 gap-2 px-2 py-2 max-w-xs mx-auto">
+        <div className="grid grid-cols-2 gap-2 px-2 max-w-xs mx-auto">
           {muscleGroups.map((muscle) => (
             <motion.div
               key={muscle.id}

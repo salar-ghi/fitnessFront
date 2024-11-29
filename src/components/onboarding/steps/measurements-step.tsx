@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";

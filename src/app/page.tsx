@@ -1,5 +1,4 @@
 import { Onboarding } from "@/components/onboarding/onboarding";
-import Image from "next/image";
 
 export default function Home() {
   return (
