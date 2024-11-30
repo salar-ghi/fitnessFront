@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { useUserStore } from "@/lib/store";
@@ -32,24 +32,23 @@ const generateDays = (year: number, month: number) => {
 
 export function AgeStep() {
   const { dateOfBirth, setDateOfBirth, nextStep, previousStep } = useUserStore();
-  const [selectedDate, setSelectedDate] = useState<{
-    year: number;
-    month: number;
-    day: number;
-  }>(() => {
-    if (dateOfBirth) {
+  
+  const now = new Date();
+  const defaultDate = {
+    year: now.getFullYear() - 25,
+    month: now.getMonth(),
+    day: now.getDate(),
+  };
+
+  const [selectedDate, setSelectedDate] = useState(() => {
+    if (dateOfBirth instanceof Date) {
       return {
         year: dateOfBirth.getFullYear(),
         month: dateOfBirth.getMonth(),
         day: dateOfBirth.getDate(),
       };
     }
-    const now = new Date();
-    return {
-      year: now.getFullYear() - 25,
-      month: now.getMonth(),
-      day: now.getDate(),
-    };
+    return defaultDate;
   });
 
   const years = generateYears();
@@ -65,8 +64,10 @@ export function AgeStep() {
     if (type === "month")
       newDate.month = months.indexOf(value as string);
     if (type === "day") newDate.day = value as number;
+    
     setSelectedDate(newDate);
-    setDateOfBirth(new Date(newDate.year, newDate.month, newDate.day));
+    const date = new Date(newDate.year, newDate.month, newDate.day);
+    setDateOfBirth(date);
   };
 
   return (

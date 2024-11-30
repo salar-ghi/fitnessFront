@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useUserStore } from "@/lib/store";
 import { GenderStep } from "./steps/gender-step";
-import { AgeRangeStep } from "./steps/age-range-step";
 import { AgeStep } from "./steps/age-step";
+import { AgeRangeStep } from "./steps/age-range-step";
 import { MeasurementsStep } from "./steps/measurements-step";
 import { BodyTypeStep } from "./steps/body-type-step";
 import { LocationStep } from "./steps/location-step";
@@ -32,7 +32,11 @@ const steps = [
   WorkoutPlan,
 ];
 
-export function Onboarding() {
+interface OnboardingProps {
+  onComplete?: () => void;
+}
+
+export function Onboarding({ onComplete }: OnboardingProps) {
   const currentStep = useUserStore((state) => state.currentStep);
   const CurrentStepComponent = steps[currentStep];
 
@@ -60,7 +64,7 @@ export function Onboarding() {
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <CurrentStepComponent />
+          <CurrentStepComponent onComplete={onComplete} />
         </motion.div>
       </AnimatePresence>
     </div>
