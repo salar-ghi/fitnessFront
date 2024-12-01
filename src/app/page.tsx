@@ -2,120 +2,88 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import {
-  AreaChart,
-  Area,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
-  RadialBarChart,
-  RadialBar,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
+import { 
+  AreaChart, 
+  Area, 
+  BarChart,
+  Bar,
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
   ResponsiveContainer,
-  Legend,
+  PieChart,
+  Pie,
+  Cell
 } from "recharts";
-import { Dumbbell, Apple, Trophy, Target, Flame, Heart } from "lucide-react";
+import { Dumbbell, Apple, Trophy, Lightbulb, Target, Heart } from "lucide-react";
+import { StatsCard } from "@/components/dashboard/stats-card";
+import { TipsGrid } from "@/components/dashboard/tips-grid";
 
-const fitnessProgress = [
-  { name: "Strength", value: 85 },
-  { name: "Endurance", value: 70 },
-  { name: "Flexibility", value: 60 },
-  { name: "Balance", value: 75 },
-  { name: "Speed", value: 65 },
+const planData = [
+  { name: "Jan", workouts: 4, diets: 2 },
+  { name: "Feb", workouts: 3, diets: 1 },
+  { name: "Mar", workouts: 5, diets: 3 },
+  { name: "Apr", workouts: 6, diets: 4 },
 ];
 
-const calorieData = Array.from({ length: 24 }, (_, i) => ({
-  hour: `${i}:00`,
-  calories: Math.floor(Math.sin(i / 3) * 300 + 500),
-  target: 400,
-}));
-
-const weeklyActivity = [
-  { day: "Mon", workout: 75, nutrition: 85 },
-  { day: "Tue", workout: 90, nutrition: 80 },
-  { day: "Wed", workout: 65, nutrition: 90 },
-  { day: "Thu", workout: 85, nutrition: 75 },
-  { day: "Fri", workout: 70, nutrition: 85 },
-  { day: "Sat", workout: 95, nutrition: 70 },
-  { day: "Sun", workout: 60, nutrition: 95 },
+const progressData = [
+  { name: "Week 1", progress: 85 },
+  { name: "Week 2", progress: 92 },
+  { name: "Week 3", progress: 78 },
+  { name: "Week 4", progress: 95 },
 ];
 
-const tips = [
-  {
-    title: "Stay Consistent",
-    description: "Build habits that last by maintaining a regular schedule.",
-    icon: Trophy,
-    color: "from-green-400 to-emerald-600",
-  },
-  {
-    title: "Track Progress",
-    description: "Monitor your journey and celebrate small victories.",
-    icon: Target,
-    color: "from-blue-400 to-indigo-600",
-  },
-  {
-    title: "Balanced Diet",
-    description: "Fuel your body with the right nutrients for optimal performance.",
-    icon: Apple,
-    color: "from-purple-400 to-pink-600",
-  },
-  {
-    title: "Heart Health",
-    description: "Keep your cardiovascular system strong with regular exercise.",
-    icon: Heart,
-    color: "from-red-400 to-rose-600",
-  },
+const goalDistribution = [
+  { name: "Weight Loss", value: 35 },
+  { name: "Muscle Gain", value: 25 },
+  { name: "Endurance", value: 20 },
+  { name: "Flexibility", value: 20 },
 ];
+
+const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#ec4899"];
 
 export default function Home() {
   return (
-    <div className="space-y-8 p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="container mx-auto w-full p-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="lg:col-span-2"
+          className="xl:col-span-2"
         >
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 shadow-lg">
-            <h2 className="text-xl font-semibold mb-4 text-green-800 dark:text-green-100">
-              Daily Energy Expenditure
-            </h2>
+          <Card className="p-6">
+            <h2 className="text-lg font-semibold mb-4">Plan Generation History</h2>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={calorieData}>
-                  <defs>
-                    <linearGradient id="colorCalories" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#22c55e" stopOpacity={0.8}/>
-                      <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="hour" />
+                <AreaChart data={planData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
                   <Area
                     type="monotone"
-                    dataKey="calories"
+                    dataKey="workouts"
+                    stackId="1"
                     stroke="#22c55e"
-                    fillOpacity={1}
-                    fill="url(#colorCalories)"
+                    fill="#22c55e"
+                    fillOpacity={0.3}
+                    name="Workout Plans"
                   />
-                  <Line
+                  <Area
                     type="monotone"
-                    dataKey="target"
+                    dataKey="diets"
+                    stackId="1"
                     stroke="#3b82f6"
-                    strokeDasharray="5 5"
+                    fill="#3b82f6"
+                    fillOpacity={0.3}
+                    name="Diet Plans"
                   />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
-          </div>
+          </Card>
         </motion.div>
 
         <motion.div
@@ -123,63 +91,75 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 shadow-lg">
-            <h2 className="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-100">
-              Fitness Balance
-            </h2>
+          <Card className="p-6">
+            <h2 className="text-lg font-semibold mb-4">Goal Distribution</h2>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={fitnessProgress}>
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="name" />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} />
-                  <Radar
-                    name="Progress"
+                <PieChart>
+                  <Pie
+                    data={goalDistribution}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    paddingAngle={5}
                     dataKey="value"
-                    stroke="#3b82f6"
-                    fill="#3b82f6"
-                    fillOpacity={0.6}
-                  />
-                </RadarChart>
+                    label
+                  >
+                    {goalDistribution.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
               </ResponsiveContainer>
             </div>
-          </div>
+          </Card>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="lg:col-span-3"
+          className="xl:col-span-2"
         >
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 shadow-lg">
-            <h2 className="text-xl font-semibold mb-4 text-purple-800 dark:text-purple-100">
-              Weekly Performance
-            </h2>
+          <Card className="p-6">
+            <h2 className="text-lg font-semibold mb-4">Weekly Progress</h2>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={weeklyActivity}>
-                  <XAxis dataKey="day" />
-                  <YAxis domain={[0, 100]} />
+                <BarChart data={progressData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
-                  <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="workout"
-                    stroke="#22c55e"
-                    strokeWidth={2}
-                    dot={{ fill: "#22c55e" }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="nutrition"
-                    stroke="#3b82f6"
-                    strokeWidth={2}
-                    dot={{ fill: "#3b82f6" }}
-                  />
-                </LineChart>
+                  <Bar dataKey="progress" fill="#22c55e" radius={[4, 4, 0, 0]} />
+                </BarChart>
               </ResponsiveContainer>
             </div>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="grid gap-6">
+            <StatsCard
+              title="Active Plans"
+              stats={[
+                { label: "Workout Plans", value: "2", icon: Dumbbell, color: "green" },
+                { label: "Diet Plans", value: "1", icon: Apple, color: "blue" }
+              ]}
+            />
+            <StatsCard
+              title="Goals Achieved"
+              stats={[
+                { label: "This Month", value: "85%", icon: Target, color: "purple" },
+                { label: "Overall", value: "92%", icon: Trophy, color: "amber" }
+              ]}
+            />
           </div>
         </motion.div>
       </div>
@@ -187,28 +167,10 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.5 }}
+        className="mt-6"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {tips.map((tip, index) => (
-            <motion.div
-              key={tip.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * (index + 1) }}
-            >
-              <div className={`bg-gradient-to-br ${tip.color} rounded-2xl p-6 shadow-lg h-full`}>
-                <div className="flex flex-col items-center text-center space-y-3">
-                  <div className="p-3 bg-white/20 rounded-full">
-                    <tip.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">{tip.title}</h3>
-                  <p className="text-white/90">{tip.description}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <TipsGrid />
       </motion.div>
     </div>
   );

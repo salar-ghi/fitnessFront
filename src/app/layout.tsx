@@ -35,7 +35,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="min-h-screen bg-background">
             <MainNav />
-            <div className="md:pl-[240px]">
+            <div className="transition-all duration-300 md:pl-[80px] xl:pl-[240px]">
               <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container flex h-14 items-center">
                   <div className="flex-1" />
@@ -45,7 +45,7 @@ export default function RootLayout({
                   </div>
                 </div>
               </header>
-              <main className="container py-6">
+              <main className="container mx-auto max-w-full px-4 py-6">
                 {children}
               </main>
             </div>

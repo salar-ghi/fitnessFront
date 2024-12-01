@@ -3,40 +3,75 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+// import {
+//   Home,
+//   Dumbbell,
+//   Apple,
+//   Settings,
+//   History,
+// } from "lucide-react";
 import {
-  Home,
-  Dumbbell,
-  Calendar,
-  Settings,
-  Apple,
-} from "lucide-react";
+  Home3D,
+  Dumbbell3D,
+  Apple3D,
+  Settings3D,
+  History3D,
+} from "@/components/ui/3d-icons";
 import { cn } from "@/lib/utils";
+
+// const navItems = [
+//   {
+//     href: "/",
+//     icon: Home,
+//     label: "Home",
+//   },
+//   {
+//     href: "/workouts",
+//     icon: Dumbbell,
+//     label: "Workouts",
+//   },
+//   {
+//     href: "/diet",
+//     icon: Apple,
+//     label: "Diet",
+//   },
+//   {
+//     href: "/history",
+//     icon: History,
+//     label: "History",
+//   },
+//   {
+//     href: "/settings",
+//     icon: Settings,
+//     label: "Settings",
+//   },
+// ] as const;
 
 const navItems = [
   {
-    title: "Home",
     href: "/",
-    icon: Home,
+    icon: Home3D,
+    label: "Home",
   },
   {
-    title: "Workouts",
     href: "/workouts",
-    icon: Dumbbell,
+    icon: Dumbbell3D,
+    label: "Workouts",
   },
   {
-    title: "Diet",
     href: "/diet",
-    icon: Apple,
+    icon: Apple3D,
+    label: "Diet",
   },
   {
-    title: "Schedule",
-    href: "/schedule",
-    icon: Calendar,
+    href: "/history",
+    icon: History3D,
+    label: "History",
   },
   {
-    title: "Settings",
     href: "/settings",
-    icon: Settings,
+    icon: Settings3D,
+    label: "Settings",
   },
 ] as const;
 
@@ -44,30 +79,38 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-background z-50">
-      <div className="grid grid-cols-5">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              "flex flex-col items-center gap-1 p-2 text-xs",
-              pathname === item.href
-                ? "text-primary"
-                : "text-muted-foreground"
-            )}
-          >
-            <item.icon className="h-5 w-5" />
-            <span>{item.title}</span>
-            {pathname === item.href && (
+    // <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t z-50">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t z-50 shadow-lg">
+      <div className="grid grid-cols-5 p-2">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "relative flex flex-col items-center justify-center p-2",
+                isActive ? "text-primary" : "text-muted-foreground"
+              )}
+              aria-label={item.label}
+            >
               <motion.div
-                layoutId="activeTab"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              />
-            )}
-          </Link>
-        ))}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className="relative"
+              >
+                <item.icon className="w-6 h-6" />
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute -inset-1 bg-primary/10 rounded-full"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </motion.div>
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );
