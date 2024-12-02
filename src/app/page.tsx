@@ -16,9 +16,8 @@ import {
   Pie,
   Cell
 } from "recharts";
-import { Dumbbell, Apple, Trophy, Lightbulb, Target, Heart } from "lucide-react";
-import { StatsCard } from "@/components/dashboard/stats-card";
 import { TipsGrid } from "@/components/dashboard/tips-grid";
+import { StatsCard } from "@/components/dashboard/stats-card";
 
 const planData = [
   { name: "Jan", workouts: 4, diets: 2 },
@@ -41,18 +40,35 @@ const goalDistribution = [
   { name: "Flexibility", value: 20 },
 ];
 
+const workoutData = [
+  { name: "Mon", workouts: 3 },
+  { name: "Tue", workouts: 4 },
+  { name: "Wed", workouts: 2 },
+  { name: "Thu", workouts: 5 },
+  { name: "Fri", workouts: 3 },
+  { name: "Sat", workouts: 4 },
+  { name: "Sun", workouts: 2 },
+];
+
+const dietData = [
+  { name: "Protein", value: 35 },
+  { name: "Carbs", value: 40 },
+  { name: "Fats", value: 25 },
+];
+
 const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#ec4899"];
+// const COLORS = ['#10B981', '#6366F1', '#F59E0B'];
 
 export default function Home() {
   return (
     <div className="container mx-auto w-full p-6">
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="xl:col-span-2"
-        >
+          className="xl:col-span-2" >
           <Card className="p-6">
             <h2 className="text-lg font-semibold mb-4">Plan Generation History</h2>
             <div className="h-[300px]">
@@ -89,8 +105,7 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
+          transition={{ delay: 0.2 }} >
           <Card className="p-6">
             <h2 className="text-lg font-semibold mb-4">Goal Distribution</h2>
             <div className="h-[300px]">
@@ -121,19 +136,18 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="xl:col-span-2"
-        >
+          transition={{ delay: 0.1 }}
+          className="xl:col-span-2" >
           <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Weekly Progress</h2>
+            <h3 className="text-lg font-semibold mb-4">Weekly Workout Progress</h3>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={progressData}>
+                <BarChart data={workoutData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="progress" fill="#22c55e" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="workouts" fill="#10B981" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -143,23 +157,60 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
+          transition={{ delay: 0.4 }} >
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-4">Nutrition Distribution</h3>
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={dietData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {dietData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="xl:col-span-2" >
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold mb-4">Active Plans</h3>
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={workoutData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="workouts" stroke="#10B981" fill="#10B981" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }} >
           <div className="grid gap-6">
-            <StatsCard
-              title="Active Plans"
-              stats={[
-                { label: "Workout Plans", value: "2", icon: Dumbbell, color: "green" },
-                { label: "Diet Plans", value: "1", icon: Apple, color: "blue" }
-              ]}
-            />
-            <StatsCard
-              title="Goals Achieved"
-              stats={[
-                { label: "This Month", value: "85%", icon: Target, color: "purple" },
-                { label: "Overall", value: "92%", icon: Trophy, color: "amber" }
-              ]}
-            />
+            <StatsCard />
           </div>
         </motion.div>
       </div>
@@ -173,5 +224,6 @@ export default function Home() {
         <TipsGrid />
       </motion.div>
     </div>
+
   );
 }

@@ -2,19 +2,34 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import { Dumbbell, Apple, Trophy, Heart } from "lucide-react";
 
-interface Stat {
-  label: string;
-  value: string;
-  icon: LucideIcon;
-  color: string;
-}
-
-interface StatsCardProps {
-  title: string;
-  stats: Stat[];
-}
+const stats = [
+  {
+    label: "Active Workouts",
+    value: "3",
+    icon: Dumbbell,
+    color: "green",
+  },
+  {
+    label: "Active Diet Plans",
+    value: "2",
+    icon: Apple,
+    color: "blue",
+  },
+  {
+    label: "Goals Achieved",
+    value: "12",
+    icon: Trophy,
+    color: "purple",
+  },
+  {
+    label: "Streak Days",
+    value: "15",
+    icon: Heart,
+    color: "amber",
+  },
+];
 
 const colorVariants = {
   green: "text-green-600 bg-green-100 dark:bg-green-900/30",
@@ -23,10 +38,10 @@ const colorVariants = {
   amber: "text-amber-600 bg-amber-100 dark:bg-amber-900/30",
 };
 
-export function StatsCard({ title, stats }: StatsCardProps) {
+export function StatsCard() {
   return (
     <Card className="p-6">
-      <h3 className="text-lg font-semibold mb-4">{title}</h3>
+      <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
       <div className="space-y-4">
         {stats.map((stat, index) => (
           <motion.div
