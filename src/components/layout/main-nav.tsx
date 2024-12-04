@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { ChevronLeft } from "lucide-react";
 import {
   Home3D,
   Dumbbell3D,

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DietOnboarding } from "@/components/diet/diet-onboarding";
 
 interface DietPlan {
@@ -183,6 +183,9 @@ export default function DietPage() {
 
       <Dialog open={isNewPlanOpen} onOpenChange={setIsNewPlanOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
+          <DialogHeader className="p-4 pb-2">
+            <DialogTitle>Create New Diet Plan</DialogTitle>
+          </DialogHeader>
           <ScrollArea className="h-[90vh]">
             <div className="p-6">
               <DietOnboarding onComplete={() => setIsNewPlanOpen(false)} />
