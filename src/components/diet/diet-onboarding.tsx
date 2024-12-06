@@ -7,9 +7,9 @@ import { CaloriesStep } from "./steps/calories-step";
 import { PreferenceStep } from "./steps/preference-step";
 import { CookingTimeStep } from "./steps/cooking-time-step";
 import { AllergiesStep } from "./steps/allergies-step";
-// import { ExcludedFoodsStep } from "./steps/excluded-foods-step";
-// import { MealFrequencyStep } from "./steps/meal-frequency-step";
-// import { DietPlanStep } from "./steps/diet-plan-step";
+import { ExcludedFoodsStep } from "./steps/excluded-foods-step";
+import { MealFrequencyStep } from "./steps/meal-frequency-step";
+import { DietPlanStep } from "./steps/diet-plan-step";
 
 const steps = [
   GoalStep,
@@ -17,9 +17,9 @@ const steps = [
   PreferenceStep,
   CookingTimeStep,
   AllergiesStep,
-  // ExcludedFoodsStep,
-  // MealFrequencyStep,
-  // DietPlanStep,
+  ExcludedFoodsStep,
+  MealFrequencyStep,
+  DietPlanStep,
 ];
 
 interface DietOnboardingProps {

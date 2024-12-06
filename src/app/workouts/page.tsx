@@ -11,6 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Onboarding } from "@/components/onboarding/onboarding";
 import { WorkoutDetails } from "@/components/workout/workout-details";
+import { WorkoutDetailsTwo } from "@/components/workout/workout-detailsTwo";
 import { Dumbbell3D } from "@/components/ui/3d-icons";
 
 interface Exercise {
@@ -28,6 +29,39 @@ interface WorkoutDay {
 
 interface WorkoutPlan {
   id: string;
+  name: string;
+  description: string;
+  duration: string;
+  progress: number;
+  nextSession: string;
+  targetMuscles: string[];
+  status: "active" | "completed" | "abandoned";
+}
+
+const mockWorkoutPlans: WorkoutPlan[] = [
+  {
+    id: "1",
+    name: "Strength Training",
+    description: "Build muscle and increase strength",
+    duration: "12 weeks",
+    progress: 45,
+    nextSession: "Today at 6:00 PM",
+    targetMuscles: ["Chest", "Back", "Legs"],
+    status: "active",
+  },
+  {
+    id: "2",
+    name: "HIIT Cardio",
+    description: "High-intensity interval training",
+    duration: "8 weeks",
+    progress: 75,
+    nextSession: "Tomorrow at 7:00 AM",
+    targetMuscles: ["Full Body", "Core"],
+    status: "active",
+  },
+];
+interface WorkoutPlanTwo {
+  id: string;
   createdAt: string;
   duration: string;
   status: "active" | "completed" | "abandoned";
@@ -40,7 +74,7 @@ interface WorkoutPlan {
   workoutDays: WorkoutDay[];
 }
 
-const mockWorkoutPlans: WorkoutPlan[] = [
+const mockWorkoutPlansTwo: WorkoutPlanTwo[] = [
   {
     id: "1",
     createdAt: "2024-03-10",
@@ -88,45 +122,10 @@ const mockWorkoutPlans: WorkoutPlan[] = [
   },
 ];
 
-interface WorkoutPlan2 {
-  id: string;
-  name: string;
-  description: string;
-  duration: string;
-  progress: number;
-  nextSession: string;
-  targetMuscles: string[];
-  status: "active" | "completed" | "abandoned";
-}
-
-
-const mockWorkoutPlans2: WorkoutPlan2[] = [
-  {
-    id: "1",
-    name: "Strength Training",
-    description: "Build muscle and increase strength",
-    duration: "12 weeks",
-    progress: 45,
-    nextSession: "Today at 6:00 PM",
-    targetMuscles: ["Chest", "Back", "Legs"],
-    status: "active",
-  },
-  {
-    id: "2",
-    name: "HIIT Cardio",
-    description: "High-intensity interval training",
-    duration: "8 weeks",
-    progress: 75,
-    nextSession: "Tomorrow at 7:00 AM",
-    targetMuscles: ["Full Body", "Core"],
-    status: "active",
-  },
-];
-
 export default function WorkoutsPage() {
   const [isNewPlanOpen, setIsNewPlanOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<WorkoutPlan | null>(null);
-  const [selectedPlan2, setSelectedPlan2] = useState<WorkoutPlan2 | null>(null);
+  const [selectedPlanTwo, setSelectedPlanTwo] = useState<WorkoutPlanTwo | null>(null);
 
   return (
     <>
@@ -145,7 +144,7 @@ export default function WorkoutsPage() {
         </div>
 
         <div className="grid gap-6">
-          {mockWorkoutPlans.map((plan) => (
+          {mockWorkoutPlansTwo.map((plan) => (
             <motion.div
               key={plan.id}
               initial={{ opacity: 0, y: 20 }}
@@ -209,7 +208,7 @@ export default function WorkoutsPage() {
                   <Button
                     variant="ghost"
                     className="text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20"
-                    onClick={() => setSelectedPlan(plan)}
+                    onClick={() => setSelectedPlanTwo(plan)}
                   >
                     View Details
                     <ChevronRight className="w-4 h-4 ml-2" />
@@ -239,9 +238,9 @@ export default function WorkoutsPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {mockWorkoutPlans2.map((plan2) => (
+          {mockWorkoutPlans.map((plan) => (
             <motion.div
-              key={plan2.id}
+              key={plan.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.02 }}
@@ -249,38 +248,38 @@ export default function WorkoutsPage() {
             >
               <Card
                 className="p-6 cursor-pointer hover:shadow-lg transition-all duration-300"
-                onClick={() => setSelectedPlan2(plan2)}
+                onClick={() => setSelectedPlan(plan)}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-full">
                     <Dumbbell3D className="w-6 h-6 text-green-600 dark:text-green-400" />
                   </div>
                   <Badge
-                    variant={plan2.status === "active" ? "default" : "secondary"}
+                    variant={plan.status === "active" ? "default" : "secondary"}
                     className="capitalize"
                   >
-                    {plan2.status}
+                    {plan.status}
                   </Badge>
                 </div>
 
-                <h3 className="text-lg font-semibold mb-2">{plan2.name}</h3>
+                <h3 className="text-lg font-semibold mb-2">{plan.name}</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {plan2.description}
+                  {plan.description}
                 </p>
 
                 <div className="space-y-4">
                   <div className="flex items-center text-sm">
                     <Calendar className="mr-2 h-4 w-4" />
-                    <span>{plan2.nextSession}</span>
+                    <span>{plan.nextSession}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <Clock className="mr-2 h-4 w-4" />
-                    <span>{plan2.duration}</span>
+                    <span>{plan.duration}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <Target className="mr-2 h-4 w-4" />
                     <div className="flex flex-wrap gap-1">
-                      {plan2.targetMuscles.map((muscle) => (
+                      {plan.targetMuscles.map((muscle) => (
                         <Badge key={muscle} variant="outline">
                           {muscle}
                         </Badge>
@@ -291,16 +290,16 @@ export default function WorkoutsPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Progress</span>
-                      <span>{plan2.progress}%</span>
+                      <span>{plan.progress}%</span>
                     </div>
-                    <Progress value={plan2.progress} className="h-2" />
+                    <Progress value={plan.progress} className="h-2" />
                   </div>
                 </div>
 
                 <Button
                   variant="ghost"
                   className="w-full mt-4 group"
-                  onClick={() => setSelectedPlan2(plan2)}
+                  onClick={() => setSelectedPlan(plan)}
                 >
                   View Details
                   <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -323,6 +322,20 @@ export default function WorkoutsPage() {
           </ScrollArea>
         </DialogContent>
       </Dialog>
+
+      <Dialog open={!!selectedPlanTwo} onOpenChange={() => setSelectedPlanTwo(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
+          <DialogHeader className="p-4 pb-2">
+            <DialogTitle>Workout Plan Details</DialogTitle>
+          </DialogHeader>
+          <ScrollArea className="h-[90vh]">
+            <div className="p-6">
+              {selectedPlanTwo && <WorkoutDetailsTwo plan={selectedPlanTwo} />}
+            </div>
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
 
       <Dialog open={!!selectedPlan} onOpenChange={() => setSelectedPlan(null)}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">

@@ -70,11 +70,14 @@ export function MainNav() {
     <AnimatePresence>
       <motion.div 
         initial={{ x: isMobile ? -240 : 0 }}
-        animate={{ x: isCollapsed ? -160 : 0 }}
+        animate={{ 
+          x: isCollapsed ? 0 : 0,
+          width: isCollapsed? 80: 240
+        }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn(
           "hidden md:flex h-screen flex-col fixed left-0 top-0 bottom-0 border-r bg-background/95 backdrop-blur-md shadow-lg z-50",
-          isCollapsed ? "w-[80px]" : "w-[240px]"
+          //isCollapsed ? "w-[80px]" : "w-[240px]"
         )}
       >
         <div className="flex h-14 items-center px-4 border-b justify-between bg-background/95 backdrop-blur">
@@ -93,20 +96,26 @@ export function MainNav() {
             variant="ghost"
             size="icon"
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="ml-auto hover:bg-primary/10 transition-colors"
+            className={cn(
+              "hover:bg-primary/10 transition-all duration-300",
+              isCollapsed ? "w-full justify-center" : "ml-auto"
+            )}
           >
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              animate={{ rotate: isCollapsed ? 0 : 180}}
+              transition={{ duration: 0.3 }}
+              // whileHover={{ scale: 1.1 }}
+              // whileTap={{ scale: 0.9 }}
             >
               <MenuIcon3D className="h-5 w-5 text-primary" />
+              {/* <ChevronLeft className="h-5 w-5 text-primary" /> */}
             </motion.div>
           </Button>
         </div>
         <nav className="flex-1 flex flex-col justify-between py-4 overflow-y-auto">
           <div className="grid gap-1 px-2">
             {navItems.map((item) => {
-              const IconComponent = item.icon;
+              const Icon = item.icon;
               const isActive = pathname === item.href;
               return (
                 <Link
@@ -122,7 +131,7 @@ export function MainNav() {
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
                     className="relative" >
-                    <item.icon className="h-5 w-5" />
+                    <Icon className="h-5 w-5" />
                   </motion.div>
                   {!isCollapsed && (
                     <span className="font-medium">{item.title}</span>

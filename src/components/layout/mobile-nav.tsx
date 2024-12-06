@@ -3,49 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-// import {
-//   Home,
-//   Dumbbell,
-//   Apple,
-//   Settings,
-//   History,
-// } from "lucide-react";
 import {
   Home3D,
   Dumbbell3D,
-  Apple3D,
+  Food3D,
   Settings3D,
   History3D,
 } from "@/components/ui/3d-icons";
 import { cn } from "@/lib/utils";
-
-// const navItems = [
-//   {
-//     href: "/",
-//     icon: Home,
-//     label: "Home",
-//   },
-//   {
-//     href: "/workouts",
-//     icon: Dumbbell,
-//     label: "Workouts",
-//   },
-//   {
-//     href: "/diet",
-//     icon: Apple,
-//     label: "Diet",
-//   },
-//   {
-//     href: "/history",
-//     icon: History,
-//     label: "History",
-//   },
-//   {
-//     href: "/settings",
-//     icon: Settings,
-//     label: "Settings",
-//   },
-// ] as const;
 
 const navItems = [
   {
@@ -60,7 +25,7 @@ const navItems = [
   },
   {
     href: "/diet",
-    icon: Apple3D,
+    icon: Food3D,
     label: "Diet",
   },
   {
@@ -84,6 +49,7 @@ export function MobileNav() {
       <div className="grid grid-cols-5 p-2">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
+          const Icon = item.icon;
           return (
             <Link
               key={item.href}
@@ -99,11 +65,11 @@ export function MobileNav() {
                 whileTap={{ scale: 0.9 }}
                 className="relative"
               >
-                <item.icon className="w-6 h-6" />
+                <Icon className="w-6 h-6" />
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute -inset-1 bg-primary/10 rounded-full"
+                    className="absolute -inset-3 bg-primary/10 rounded-full"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
