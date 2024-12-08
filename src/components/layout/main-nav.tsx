@@ -4,7 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Home,
+  Dumbbell,
+  Calendar,
+  History,
+  Settings,
+  Apple,
+  MenuIcon } from "lucide-react";
 import {
   Home3D,
   Dumbbell3D,
@@ -26,7 +32,7 @@ const navItems = [
   {
     title: "Workouts",
     href: "/workouts",
-    icon: Dumbbell3D,
+    icon: Dumbbell,
   },
   {
     title: "Diet",
@@ -87,7 +93,7 @@ export function MainNav() {
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <Dumbbell3D className="h-6 w-6 text-primary" />
+                <Dumbbell className="h-5 w-5 text-primary" />
               </motion.div>
               <span className="font-semibold">Fitness App</span>
             </Link>
@@ -113,7 +119,7 @@ export function MainNav() {
           </Button>
         </div>
         <nav className="flex-1 flex flex-col justify-between py-4 overflow-y-auto">
-          <div className="grid gap-1 px-2">
+          <div className="grid gap-1 px-4">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;

@@ -18,6 +18,7 @@ import {
 } from "recharts";
 import { TipsGrid } from "@/components/dashboard/tips-grid";
 import { StatsCard } from "@/components/dashboard/stats-card";
+import CustomTooltip from "@/components/elements/CustomTooltip"
 
 const planData = [
   { name: "Jan", workouts: 4, diets: 2 },
@@ -64,6 +65,7 @@ export default function Home() {
     <div className="container mx-auto w-full p-6">
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
 
+        {/* Plan Generation History */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,17 +113,9 @@ export default function Home() {
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={goalDistribution}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                    label
-                  >
+                  <Pie data={goalDistribution} cx="50%" cy="50%"
+                    innerRadius={60} outerRadius={80}
+                    fill="#8884d8" paddingAngle={5} dataKey="value" label>
                     {goalDistribution.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
@@ -133,6 +127,7 @@ export default function Home() {
           </Card>
         </motion.div>
 
+        {/* Weekly Workout Progress */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -163,21 +158,15 @@ export default function Home() {
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={dietData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
+                  <Pie data={dietData} cx="50%" cy="50%"
+                    innerRadius={60} outerRadius={80} 
+                    fill="#8884d8" paddingAngle={5} dataKey="value" label>
                     {dietData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
                   <Tooltip />
+                  {/* <Tooltip content={<CustomTooltip className="bg-white text-black rounded-sm shadow-sm p-2" />} />                   */}
                 </PieChart>
               </ResponsiveContainer>
             </div>
