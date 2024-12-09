@@ -3,6 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { ChevronLeft, Home,
+  Dumbbell,
+  Calendar,
+  History,
+  Settings,
+  Apple,
+  
+   } from "lucide-react";
 import {
   Home3D,
   Dumbbell3D,
@@ -20,12 +28,12 @@ const navItems = [
   },
   {
     href: "/workouts",
-    icon: Dumbbell3D,
+    icon: Dumbbell,
     label: "Workouts",
   },
   {
     href: "/diet",
-    icon: Food3D,
+    icon: Apple,
     label: "Diet",
   },
   {
@@ -51,21 +59,14 @@ export function MobileNav() {
           const isActive = pathname === item.href;
           const Icon = item.icon;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "relative flex flex-col items-center justify-center p-2",
-                isActive ? "text-primary" : "text-muted-foreground"
-              )}
+            <Link key={item.href} href={item.href} prefetch scroll={false}
+              className={cn("relative flex flex-col items-center justify-center p-2", isActive ? "text-primary" : "text-muted-foreground")}
               aria-label={item.label}
             >
               <motion.div
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative"
+                whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }} className="relative"
               >
-                <Icon className="w-6 h-6" />
+                <Icon className="w-5 h-5" />
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"

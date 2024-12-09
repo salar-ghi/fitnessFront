@@ -1,4 +1,5 @@
 import React from 'react';
+import { ComposedChart, Tooltip } from 'recharts';
 
 interface CustomTooltipProps {
     active?: boolean;

@@ -18,7 +18,7 @@ import {
 } from "recharts";
 import { TipsGrid } from "@/components/dashboard/tips-grid";
 import { StatsCard } from "@/components/dashboard/stats-card";
-import CustomTooltip from "@/components/elements/CustomTooltip"
+
 
 const planData = [
   { name: "Jan", workouts: 4, diets: 2 },
@@ -62,23 +62,19 @@ const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#ec4899"];
 
 export default function Home() {
   return (
-    <div className="container mx-auto w-full p-6">
+    <div className="container mx-auto min-w-full p-2 lg:p-4 xl:p-6">
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
 
         {/* Plan Generation History */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="xl:col-span-2" >
-          <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Plan Generation History</h2>
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={planData}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="xl:col-span-2">
+          <Card className="py-4 xl:py-6 xl:pr-6">
+            <h2 className="text-md font-semibold mb-4 pl-2 lg:pl-4 xl:pl-6">Plan Generation History</h2>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%" className="font-semibold text-sm pt-2 -ml-6 -mr-4 xl:mr-0 xl:-ml-4">
+                <AreaChart data={planData} className="">
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
-                  <YAxis />
+                  <YAxis />                  
                   <Tooltip />
                   <Area
                     type="monotone"
@@ -97,6 +93,7 @@ export default function Home() {
                     fill="#3b82f6"
                     fillOpacity={0.3}
                     name="Diet Plans"
+                    className="text-green-500 text-sm font-semibold"
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -104,14 +101,11 @@ export default function Home() {
           </Card>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }} >
-          <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Goal Distribution</h2>
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} >
+          <Card className="py-4 xl:py-6 xl:pr-6">
+            <h2 className="text-md font-semibold mb-4 pl-2 lg:pl-4 xl:pl-6">Goal Distribution</h2>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%" className="font-semibold text-sm pt-2 -ml-6 -mr-4 xl:mr-0 xl:-ml-4">
                 <PieChart>
                   <Pie data={goalDistribution} cx="50%" cy="50%"
                     innerRadius={60} outerRadius={80}
@@ -128,21 +122,17 @@ export default function Home() {
         </motion.div>
 
         {/* Weekly Workout Progress */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="xl:col-span-2" >
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-4">Weekly Workout Progress</h3>
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={workoutData}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="xl:col-span-2" >
+          <Card className="py-4 xl:py-6 xl:pr-6">
+            <h3 className="text-md font-semibold mb-4 pl-2 lg:pl-4 xl:pl-6">Weekly Workout Progress</h3>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%" className="font-semibold text-sm pt-2 -ml-6 -mr-4 xl:mr-0 xl:-ml-4">
+                <BarChart data={workoutData} className="text-sm font-semibold">
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
+                  <XAxis dataKey="name" className="font-semibold text-sm "/>
+                  <YAxis className="font-serif bg-slate-900  text-sm" />
                   <Tooltip />
-                  <Bar dataKey="workouts" fill="#10B981" />
+                  <Bar dataKey="workouts" fill="#10B981" className="text-green-500 text-sm font-semibold" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -173,21 +163,17 @@ export default function Home() {
           </Card>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="xl:col-span-2" >
-          <Card className="p-6">
-            <h3 className="text-lg font-semibold mb-4">Active Plans</h3>
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={workoutData}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="xl:col-span-2" >
+          <Card className="py-4 xl:py-6 xl:pr-6">
+            <h3 className="text-md font-semibold mb-4 pl-2 lg:pl-4 xl:pl-6">Active Plans</h3>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%" className="font-semibold text-sm pt-2 -ml-6 -mr-4 xl:mr-0 xl:-ml-4">
+                <AreaChart data={workoutData} className="text-sm font-semibold">
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
+                  <XAxis dataKey="name" className="font-semibold text-sm "/>
                   <YAxis />
                   <Tooltip />
-                  <Area type="monotone" dataKey="workouts" stroke="#10B981" fill="#10B981" />
+                  <Area type="monotone" dataKey="workouts" stroke="#10B981" fill="#10B981" className="text-green-500 text-sm font-semibold"/>
                 </AreaChart>
               </ResponsiveContainer>
             </div>

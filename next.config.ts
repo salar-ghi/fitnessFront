@@ -15,6 +15,9 @@ const nextConfig = {
   ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;
