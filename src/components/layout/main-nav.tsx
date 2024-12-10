@@ -4,16 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronLeft, Home,
+import { // ChevronLeft, Home, Calendar, History, Settings, Apple, MenuIcon, 
   Dumbbell,
-  Calendar,
-  History,
-  Settings,
-  Apple,
-  MenuIcon } from "lucide-react";
+} from "lucide-react";
 import {
   Home3D,
-  Dumbbell3D,
   Calendar3D,
   History3D,
   Settings3D,
@@ -22,6 +17,9 @@ import {
 } from "@/components/ui/3d-icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+// import useToggleStore from '@/lib/store/toggle-store';
+import { setBooleanInLocalStorage, getBooleanFromLocalStorage } from "@/utils/localStorage";
+
 
 const navItems = [
   {
@@ -58,13 +56,28 @@ const navItems = [
 
 export function MainNav() {
   const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // const [isCollapsed, setIsCollapsed] = useState(false);
+  // const [isCollapsed, setIsCollapsed] = useToggleStore(state => [state.isCollapsed, state.setIsCollapsed]);
+  // const { isToggled, toggle } = useToggleStore();
+  const [isToggled, setIsToggled] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Retrieve the value from local storage on component mount
+    const storedValue = getBooleanFromLocalStorage("isToggled");
+    setIsToggled(storedValue);
+  }, []);
+
+  const handleToggle = () => {
+    const newValue = !isToggled;
+    setIsToggled(newValue);
+    setBooleanInLocalStorage("isToggled", newValue); // Store the new 
+  };
+
+  useEffect(() => {
     const checkWidth = () => {
-      setIsMobile(window.innerWidth < 1199);
-      setIsCollapsed(window.innerWidth < 1199);
+      setIsMobile(window.innerWidth < 1280);
+      setIsToggled(window.innerWidth < 1280);
     };
 
     checkWidth();
@@ -76,7 +89,7 @@ export function MainNav() {
     <AnimatePresence>
       <motion.div 
         initial={{ x: isMobile ? -240 : 0 }}
-        animate={{ x: isCollapsed ? 0 : 0, width: isCollapsed? 72: 240 }}
+        animate={{ x: isToggled ? 0 : 0, width: isToggled ? 72: 240 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn(
           "hidden md:flex h-screen flex-col fixed left-0 top-0 bottom-0 border-r bg-background/95 backdrop-blur-md shadow-lg z-50",
@@ -84,28 +97,23 @@ export function MainNav() {
         )}
       >
         <div className="flex h-14 items-center px-4 border-b justify-between bg-background/95 backdrop-blur">
-          {!isCollapsed && (
+          {!isToggled && (
             <Link href="/" className="flex items-center space-x-2">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 10 }}
-                whileTap={{ scale: 0.9 }}
-              >
+              <motion.div whileHover={{ scale: 1.1, rotate: 10 }} whileTap={{ scale: 0.9 }} >
                 <Dumbbell className="h-5 w-5 text-primary" />
               </motion.div>
               <span className="font-semibold">Fitness App</span>
             </Link>
           )}
           <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className={cn(
-              "hover:bg-primary/10 transition-all duration-300",
-              isCollapsed ? "w-full justify-center" : "ml-auto"
+            // variant="ghost" size="icon" onClick={() => setIsToggled(!isToggled)}
+            variant="ghost" size="icon" onClick={handleToggle}
+            className={cn("hover:bg-primary/10 transition-all duration-300",
+              isToggled ? "w-full justify-center" : "ml-auto"
             )}
           >
             <motion.div
-              animate={{ rotate: isCollapsed ? 0 : 180}}
+              animate={{ rotate: isToggled ? 0 : 180}}
               transition={{ duration: 0.3 }}
               // whileHover={{ scale: 1.1 }}
               // whileTap={{ scale: 0.9 }}
@@ -133,7 +141,7 @@ export function MainNav() {
                     className="relative" >
                     <Icon className="h-[18px] w-[18px]" />
                   </motion.div>
-                  {!isCollapsed && (
+                  {!isToggled && (
                     <span className="font-medium">{item.title}</span>
                   )}
                   {isActive && (

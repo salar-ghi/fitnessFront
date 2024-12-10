@@ -1,3 +1,5 @@
+// 'use client'
+// import { Metadata } from 'next';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -7,6 +9,10 @@ import { MainNav } from "@/components/layout/main-nav";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { UserNav } from "@/components/layout/user-nav";
 import { ModeToggle } from "@/components/layout/mode-toggle";
+
+import { setBooleanInLocalStorage, getBooleanFromLocalStorage } from "@/utils/localStorage";
+import React, { useState } from "react";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,13 +35,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const { isToggled, toggle } = useToggleStore();
+
+  // useEffect(() => {
+  //   toggle();
+  // }, []);
+  // const [isToggled, setIsToggled] = useState<boolean>(false);
+  let isToggled = getBooleanFromLocalStorage("isToggled");
+  React.useEffect(() => {
+    isToggled = getBooleanFromLocalStorage("isToggled");
+
+  });
+  console.log(isToggled)
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="min-h-screen bg-background">
             <MainNav />
-            <div className="transition-all duration-300 md:pl-[72px] xl:pl-[240px]">
+            <div className={`transition-all duration-300 ${isToggled ? "pl-[72px]": "pl-[240px]"}`}>
+            {/* <div className="transition-all duration-300 md:pl-[72px] xl:pl-[240px]"> */}
               <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="container flex h-14 items-center">
                   <div className="flex-1" />
