@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/3d-icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-// import useToggleStore from '@/lib/store/toggle-store';
+import useToggleStore from '@/lib/store/toggle-store';
 import { setBooleanInLocalStorage, getBooleanFromLocalStorage } from "@/utils/localStorage";
 
 
@@ -58,28 +58,18 @@ export function MainNav() {
   const pathname = usePathname();
   // const [isCollapsed, setIsCollapsed] = useState(false);
   // const [isCollapsed, setIsCollapsed] = useToggleStore(state => [state.isCollapsed, state.setIsCollapsed]);
-  // const { isToggled, toggle } = useToggleStore();
-  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const { isToggled, toggle } = useToggleStore();
+  // const [isToggled, setIsToggled] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Retrieve the value from local storage on component mount
-    const storedValue = getBooleanFromLocalStorage("isToggled");
-    setIsToggled(storedValue);
-  }, []);
-
-  const handleToggle = () => {
-    const newValue = !isToggled;
-    setIsToggled(newValue);
-    setBooleanInLocalStorage("isToggled", newValue); // Store the new 
-  };
 
   useEffect(() => {
     const checkWidth = () => {
       setIsMobile(window.innerWidth < 1280);
-      setIsToggled(window.innerWidth < 1280);
+      if (window.innerWidth < 1280) {
+        toggle;
+      };    
+      // toggle(window.innerWidth < 1280);
     };
-
     checkWidth();
     window.addEventListener('resize', checkWidth);
     return () => window.removeEventListener('resize', checkWidth);
@@ -93,7 +83,7 @@ export function MainNav() {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn(
           "hidden md:flex h-screen flex-col fixed left-0 top-0 bottom-0 border-r bg-background/95 backdrop-blur-md shadow-lg z-50",
-          //isCollapsed ? "w-[80px]" : "w-[240px]"
+          isToggled ? "w-[72px]" : "w-[240px]"
         )}
       >
         <div className="flex h-14 items-center px-4 border-b justify-between bg-background/95 backdrop-blur">
@@ -107,7 +97,7 @@ export function MainNav() {
           )}
           <Button
             // variant="ghost" size="icon" onClick={() => setIsToggled(!isToggled)}
-            variant="ghost" size="icon" onClick={handleToggle}
+            variant="ghost" size="icon" onClick={toggle}
             className={cn("hover:bg-primary/10 transition-all duration-300",
               isToggled ? "w-full justify-center" : "ml-auto"
             )}

@@ -11,6 +11,7 @@
 
 const nextConfig = {
   output: 'export',
+  reactstrictMode: false,
   eslint: {
   ignoreDuringBuilds: true,
   },
