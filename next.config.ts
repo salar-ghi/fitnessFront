@@ -10,8 +10,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: 'export',
-  reactstrictMode: false,
+  // output: 'export',
+  // reactstrictMode: false,
   eslint: {
   ignoreDuringBuilds: true,
   },
@@ -19,6 +19,15 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true, // Set to true for permanent redirects (301)
+      },
+    ];
+},
 };
 
 module.exports = nextConfig;

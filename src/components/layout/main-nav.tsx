@@ -18,55 +18,51 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import useToggleStore from '@/lib/store/toggle-store';
-import { setBooleanInLocalStorage, getBooleanFromLocalStorage } from "@/utils/localStorage";
 
 
 const navItems = [
   {
     title: "Home",
-    href: "/",
+    href: "/home",
     icon: Home3D,
   },
   {
     title: "Workouts",
-    href: "/workouts",
+    href: "/home/workouts",
     icon: Dumbbell,
   },
   {
     title: "Diet",
-    href: "/diet",
+    href: "/home/diet",
     icon: Apple3D,
   },
   {
     title: "Schedule",
-    href: "/schedule",
+    href: "/home/schedule",
     icon: Calendar3D,
   },
   {
     title: "History",
-    href: "/history",
+    href: "/home/history",
     icon: History3D,
   },
   {
     title: "Settings",
-    href: "/settings",
+    href: "/home/settings",
     icon: Settings3D,
   },
 ] as const;
 
 export function MainNav() {
   const pathname = usePathname();
-  // const [isCollapsed, setIsCollapsed] = useState(false);
-  // const [isCollapsed, setIsCollapsed] = useToggleStore(state => [state.isCollapsed, state.setIsCollapsed]);
-  const { isToggled, toggle } = useToggleStore();
-  // const [isToggled, setIsToggled] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { isToggled, toggle } = useToggleStore();
 
   useEffect(() => {
     const checkWidth = () => {
       setIsMobile(window.innerWidth < 1280);
       if (window.innerWidth < 1280) {
-        toggle;
+        toggle();
       };    
       // toggle(window.innerWidth < 1280);
     };

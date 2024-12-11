@@ -1,18 +1,8 @@
-// 'use client'
-// import { Metadata } from 'next';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
-// import { MainNav } from "@/components/layout/main-nav";
-// import { MobileNav } from "@/components/layout/mobile-nav";
-// import { UserNav } from "@/components/layout/user-nav";
-// import { ModeToggle } from "@/components/layout/mode-toggle";
-
 import React from "react";
-import useToggleStore from "@/lib/store/toggle-store";
-
 
 
 const geistSans = localFont({
@@ -36,34 +26,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const { isToggled, toggle } = useToggleStore();
-  // React.useEffect(() => {
-  //   toggle;
-  //   console.log(`layout page Count changed: ${isToggled}`);
-  // }, [isToggled]);
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             {children}
-          {/* <div className="min-h-screen bg-background">
-            <MainNav />            
-            <div className="transition-all duration-300 pl-[240px] md:pl-[72px] xl:pl-[240px]">
-              <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container flex h-14 items-center">
-                  <div className="flex-1" />
-                  <div className="flex items-center gap-2">
-                    <ModeToggle />
-                    <UserNav />
-                  </div>
-                </div>
-              </header>
-              <main className="container mx-auto max-w-full px-2 py-2">
-                
-              </main>
-            </div>
-            <MobileNav />
-          </div> */}
           </ThemeProvider>
       </body>
     </html>
