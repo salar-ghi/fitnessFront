@@ -15,6 +15,8 @@ import { GoalsStep } from "./steps/goals-step";
 import { PlanDurationStep } from "./steps/plan-duration-step";
 import { ScheduleStep } from "./steps/schedule-step";
 import { WorkoutPlan } from "./steps/workout-plan";
+import { DesiredPhysiqueStep } from "./steps/desired-physique-step";
+import { BodyGoalsStep } from "./steps/body-goals-step";
 
 const steps = [
   GenderStep,
@@ -22,6 +24,8 @@ const steps = [
   AgeRangeStep,
   MeasurementsStep,
   BodyTypeStep,
+  BodyGoalsStep,
+  DesiredPhysiqueStep,
   LocationStep,
   EquipmentStep,
   MuscleGroupStep,
