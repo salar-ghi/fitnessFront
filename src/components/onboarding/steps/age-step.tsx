@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { useUserStore } from "@/lib/store";
@@ -51,6 +51,25 @@ export function AgeStep() {
     return defaultDate;
   });
 
+  // const [selectedDate, setSelectedDate] = useState<{
+  //   year: number;
+  //   month: number;
+  //   day: number;
+  // }>(() => {
+  //   if (dateOfBirth) {
+  //     return {
+  //       year: dateOfBirth.getFullYear(),
+  //       month: dateOfBirth.getMonth(),
+  //       day: dateOfBirth.getDate(),
+  //     };
+  //   }
+  //   const now = new Date();
+  //   return {
+  //     year: now.getFullYear() - 25,
+  //     month: now.getMonth(),
+  //     day: now.getDate(),
+  //   };
+  // });
   const years = generateYears();
   const months = generateMonths();
   const days = generateDays(selectedDate.year, selectedDate.month);
@@ -71,28 +90,28 @@ export function AgeStep() {
   };
 
   return (
-    <motion.div
+    <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="space-y-6"
-    >
+      className="space-y-6" >
       <h2 className="text-2xl font-semibold text-center text-green-800 dark:text-green-100">
         When were you born?
       </h2>
 
-      <Card className="p-4 max-w-sm mx-auto">
+      <Card className="pt-6 max-w-sm mx-auto border-0 !border-none">
         <div className="grid grid-cols-3 gap-3">
+          
           <div className="space-y-2">
-            <Label className="text-xs font-medium">Year</Label>
-            <div className="relative">
-              <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+            <Label className="text-xs font-medium flex items-center justify-center">Year</Label>
+            <div className="relative ">
+              <ScrollArea className="h-[220px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden ">
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
-                <div className="py-20">
+                <div className="py-5">
                   {years.map((year) => (
                     <div
                       key={year}
-                      className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                      className={`px-3 py-2 cursor-pointer text-sm transition-colors flex items-center justify-center ${
                         selectedDate.year === year
                           ? "bg-green-500 text-white"
                           : "hover:bg-green-100 dark:hover:bg-green-900"
@@ -108,16 +127,16 @@ export function AgeStep() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-xs font-medium">Month</Label>
+            <Label className="text-xs font-medium flex items-center justify-center">Month</Label>
             <div className="relative">
-              <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+              <ScrollArea className="h-[220px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
-                <div className="py-20">
+                <div className="py-5">
                   {months.map((month) => (
                     <div
                       key={month}
-                      className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                      className={`px-3 py-2 cursor-pointer text-sm transition-colors flex items-center justify-center ${
                         months[selectedDate.month] === month
                           ? "bg-green-500 text-white"
                           : "hover:bg-green-100 dark:hover:bg-green-900"
@@ -133,16 +152,16 @@ export function AgeStep() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-xs font-medium">Day</Label>
+            <Label className="text-xs font-medium flex items-center justify-center">Day</Label>
             <div className="relative">
-              <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+              <ScrollArea className="h-[220px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
                 <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
-                <div className="py-20">
+                <div className="py-5">
                   {days.map((day) => (
                     <div
                       key={day}
-                      className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                      className={`px-3 py-2 cursor-pointer text-sm transition-colors flex items-center justify-center ${
                         selectedDate.day === day
                           ? "bg-green-500 text-white"
                           : "hover:bg-green-100 dark:hover:bg-green-900"

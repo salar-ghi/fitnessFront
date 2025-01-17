@@ -69,16 +69,15 @@ export function EquipmentStep() {
         What equipment do you have?
       </h2>
 
-      <ScrollArea className="h-[calc(100vh-200px)]">
+      <ScrollArea className="space-y-2">
         <div className="grid grid-cols-2 gap-2 px-2 max-w-xs mx-auto">
           {filteredEquipment.map((eq) => (
             <motion.div
               key={eq.id}
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+              whileTap={{ scale: 0.98 }} >
               <Card
-                className={`aspect-square overflow-hidden cursor-pointer transition-all ${
+                className={`aspect-square overflow-hidden cursor-pointer transition-all m-1 ${
                   equipment.includes(eq.id)
                     ? "ring-2 ring-green-500"
                     : "hover:shadow-lg"
@@ -100,7 +99,7 @@ export function EquipmentStep() {
                       checked={equipment.includes(eq.id)}
                       className="mt-1 border-green-500 data-[state=checked]:bg-green-500"
                     />
-                    <div>
+                    <div className="">
                       <label htmlFor={eq.id} className="text-xs font-medium">
                         {eq.label}
                       </label>
@@ -116,7 +115,7 @@ export function EquipmentStep() {
         </div>
       </ScrollArea>
 
-      <div className="flex justify-between mt-4 px-2">
+      <div className="flex justify-between mt-4 px-2 pt-2">
         <Button
           onClick={previousStep}
           variant="outline"

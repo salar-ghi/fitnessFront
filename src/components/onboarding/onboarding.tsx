@@ -36,11 +36,12 @@ const steps = [
   WorkoutPlan,
 ];
 
-interface OnboardingProps {
-  onComplete?: () => void;
-}
+// interface OnboardingProps {
+//   onComplete?: () => void;
+// }
 
-export function Onboarding({ onComplete }: OnboardingProps) {
+// export function Onboarding({ onComplete }: OnboardingProps) {
+export function Onboarding() {
   const currentStep = useUserStore((state) => state.currentStep);
   const CurrentStepComponent = steps[currentStep];
 
@@ -66,9 +67,9 @@ export function Onboarding({ onComplete }: OnboardingProps) {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <CurrentStepComponent onComplete={onComplete} />
+          transition={{ duration: 0.3 }} >
+          {/* <CurrentStepComponent onComplete={onComplete} /> */}
+          <CurrentStepComponent />
         </motion.div>
       </AnimatePresence>
     </div>

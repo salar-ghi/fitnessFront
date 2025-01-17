@@ -52,8 +52,7 @@ export function AgeRangeStep() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="space-y-6"
-    >
+      className="space-y-6" >
       <h2 className="text-2xl font-semibold text-center text-green-800 dark:text-green-100">
         Select Your Age Range
       </h2>

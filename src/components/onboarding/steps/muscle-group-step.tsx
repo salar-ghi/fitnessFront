@@ -54,22 +54,19 @@ export function MuscleGroupStep() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="space-y-4"
-    >
+      className="space-y-4" >
       <h2 className="text-xl font-semibold text-center text-green-800 dark:text-green-100">
         Target Muscle Groups
       </h2>
 
-      <ScrollArea className="h-[calc(100vh-200px)]">
+      <ScrollArea className="space-y-2">
         <div className="grid grid-cols-2 gap-2 px-2 max-w-xs mx-auto">
           {muscleGroups.map((muscle) => (
             <motion.div
               key={muscle.id}
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Card
-                className={`aspect-square overflow-hidden cursor-pointer transition-all ${
+              whileTap={{ scale: 0.98 }} >
+              <Card className={`aspect-square overflow-hidden cursor-pointer transition-all m-1 ${
                   targetMuscles.includes(muscle.id)
                     ? "ring-2 ring-green-500"
                     : "hover:shadow-lg"
@@ -110,7 +107,7 @@ export function MuscleGroupStep() {
         </div>
       </ScrollArea>
 
-      <div className="flex justify-between mt-4 px-2">
+      <div className="flex justify-between mt-4 px-2 pt-2">
         <Button
           onClick={previousStep}
           variant="outline"

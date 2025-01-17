@@ -9,19 +9,19 @@ import { Label } from "@/components/ui/label";
 
 const generateHeights = () => {
   const heights = [];
-  for (let h = 60; h <= 220; h++) {
+  for (let h = 80; h <= 230; h++) {
     heights.push(h);
   }
-  heights.push("220+");
+  heights.push("230+");
   return heights;
 };
 
 const generateWeights = () => {
   const weights = [];
-  for (let w = 40; w <= 150; w++) {
+  for (let w = 35; w <= 220; w++) {
     weights.push(w);
   }
-  weights.push("150+");
+  weights.push("220+");
   return weights;
 };
 
@@ -40,18 +40,18 @@ export function MeasurementsStep() {
         Your Measurements
       </h2>
 
-      <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
-        <Card className="p-4">
-          <Label className="text-xs font-medium">Height (cm)</Label>
-          <div className="relative mt-2">
-            <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+      <div className="grid grid-cols-2 max-w-sm mx-auto">
+        <Card className="p-4 border-0 !border-none">
+          <Label className="text-xs font-medium flex items-center justify-center">Height (cm)</Label>
+          <div className="relative mt-2 pt-1">
+            <ScrollArea className="h-[220px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
               <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
-              <div className="py-20">
+              <div className="py-5">
                 {heights.map((h) => (
                   <div
                     key={h}
-                    className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                    className={`px-3 py-2 cursor-pointer text-sm transition-colors flex items-center justify-center ${
                       height === h
                         ? "bg-green-500 text-white"
                         : "hover:bg-green-100 dark:hover:bg-green-900"
@@ -66,17 +66,17 @@ export function MeasurementsStep() {
           </div>
         </Card>
 
-        <Card className="p-4">
-          <Label className="text-xs font-medium">Weight (kg)</Label>
-          <div className="relative mt-2">
-            <ScrollArea className="h-[180px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
+        <Card className="p-4 !border-none">
+          <Label className="text-xs font-medium flex items-center justify-center">Weight (kg)</Label>
+          <div className="relative mt-2 pt-1">
+            <ScrollArea className="h-[220px] rounded-md border bg-white dark:bg-gray-950 overflow-hidden">
               <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-gray-950 to-transparent pointer-events-none z-10" />
-              <div className="py-20">
+              <div className="py-5">
                 {weights.map((w) => (
                   <div
                     key={w}
-                    className={`px-3 py-2 cursor-pointer text-sm transition-colors ${
+                    className={`px-3 py-2 cursor-pointer text-sm transition-colors flex items-center justify-center ${
                       weight === w
                         ? "bg-green-500 text-white"
                         : "hover:bg-green-100 dark:hover:bg-green-900"

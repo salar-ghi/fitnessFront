@@ -27,11 +27,9 @@ interface UserState {
   height: number | null;
   weight: number | null;
   targetWeight: number | null;
-  bodyType: BodyType | null;
-  
+  bodyType: BodyType | null;  
   bodyGoals: Record<string, number>;
   desiredPhysique: string | null;
-
   location: Location | null;
   equipment: Equipment[];
   targetMuscles: MuscleGroup[];
@@ -40,19 +38,16 @@ interface UserState {
   planDuration: PlanDuration | null;
   workoutSchedule: WorkoutSchedule[];
   bodyFat: number | null;
-
-  setCurrentStep: (step: number) => void;
   setGender: (gender: Gender) => void;
+  setCurrentStep: (step: number) => void;
   setDateOfBirth: (date: Date) => void;
   setAgeRange: (range: AgeRange) => void;
   setHeight: (height: number) => void;
   setWeight: (weight: number) => void;
   setTargetWeight: (weight: number) => void;
-  setBodyType: (type: BodyType) => void;
-  
+  setBodyType: (type: BodyType) => void;  
   setBodyGoalValue: (part: string, value: number) => void;
   setDesiredPhysique: (type: string) => void;
-
   setLocation: (location: Location) => void;
   toggleEquipment: (equipment: Equipment) => void;
   toggleMuscle: (muscle: MuscleGroup) => void;
