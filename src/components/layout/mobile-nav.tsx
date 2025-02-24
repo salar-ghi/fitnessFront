@@ -27,7 +27,7 @@ const navItems = [
     label: "Home",
   },
   {
-    href: "/workouts",
+    href: "/home/workouts",
     icon: Dumbbell,
     label: "Workouts",
   },
@@ -37,12 +37,12 @@ const navItems = [
     label: "Diet",
   },
   {
-    href: "/history",
+    href: "/home/history",
     icon: History3D,
     label: "History",
   },
   {
-    href: "/settings",
+    href: "/home/settings",
     icon: Settings3D,
     label: "Settings",
   },
