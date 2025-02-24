@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plus, Calendar, Target, Clock, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -126,6 +126,15 @@ export default function WorkoutsPage() {
   const [isNewPlanOpen, setIsNewPlanOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<WorkoutPlan | null>(null);
   const [selectedPlanTwo, setSelectedPlanTwo] = useState<WorkoutPlanTwo | null>(null);
+  const [formattedDates, setFormattedDates] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const formatted = mockWorkoutPlansTwo.reduce((acc, plan) => {
+      acc[plan.id] = new Date(plan.createdAt).toLocaleDateString();
+      return acc;
+    }, {} as Record<string, string>);
+    setFormattedDates(formatted);
+  }, []);
 
   return (
     <>
@@ -134,7 +143,7 @@ export default function WorkoutsPage() {
           <h1 className="text-2xl font-bold text-green-800 dark:text-green-100">
             My Workout Plans
           </h1>
-          <Button 
+          <Button
             className="bg-green-600 hover:bg-green-700"
             onClick={() => setIsNewPlanOpen(true)}
           >
@@ -142,7 +151,6 @@ export default function WorkoutsPage() {
             New Plan
           </Button>
         </div>
-
         <div className="grid gap-6">
           {mockWorkoutPlansTwo.map((plan) => (
             <motion.div
@@ -176,7 +184,7 @@ export default function WorkoutsPage() {
                     <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-300">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>Started {new Date(plan.createdAt).toLocaleDateString()}</span>
+                        <span>Started {formattedDates[plan.id] || "Loading..."}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4" />
@@ -236,7 +244,6 @@ export default function WorkoutsPage() {
             New Plan
           </Button>
         </div>
-
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {mockWorkoutPlans.map((plan) => (
             <motion.div
