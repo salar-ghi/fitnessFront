@@ -20,11 +20,11 @@ export default function DashboardLayout({
     <div className="min-h-screen bg-background">
       <MainNav />
       {/* check mobile */}
-      <div className={`transition-all duration-300` }>
+      <div className={`transition-all duration-300 ${isToggled ? "md:pl-[72px]" : "md:pl-[240px]"} `}>
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-14 items-center">
+          <div className="flex h-14 items-center  ">
             <div className="flex-1" />
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-end gap-2 sm:pr-2 xs:pr-2  ">
               <ModeToggle />
               <UserNav />
             </div>
